@@ -5,9 +5,13 @@ document
 	)
 
 document.querySelector('#block').addEventListener('click', () => {
-	let sum
-	for (let i = 0; i < 10000000000; i++) {
-		sum = sum + i
-	}
-	console.log('ciclo finito', Date.now())
+	blockEventLoop(10)
 })
+
+function blockEventLoop(seconds) {
+	const startTimestamp = Date.now()
+	const endTimestamp = Date.now() + seconds * 1000
+	while (endTimestamp - Date.now() > 0) {}
+	const blockingTime = (Date.now() - startTimestamp) / 1000
+	console.log(`Hai bloccato l'event loop per ${blockingTime} secondi`)
+}
